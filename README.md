@@ -25,7 +25,8 @@ python 運行視窗.py
 
 
 ## 介面預覽
-![image](https://github.com/user-attachments/assets/382adb52-d4ae-444b-9501-b3720c2413bf)
+![image](https://github.com/user-attachments/assets/e296ded8-01d5-4703-b540-fb480a4d6d4c)
+
 
 
 
