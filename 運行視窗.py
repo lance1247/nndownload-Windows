@@ -157,7 +157,7 @@ def confirm(values):
     command = f'python {nndownload_path} {video_url} -u {username} -p {password} ' + ' '.join(options)
     
     # 顯示提示信息
-    display_message('請到郵箱獲取驗證碼，確認後請回到本介面輸入驗證碼')
+    display_message('請到郵箱獲取驗證碼，確認後請回到本視窗輸入驗證碼')
     
     # 啟動下載命令
     threading.Thread(target=run_command, args=(command,), daemon=True).start()
@@ -165,7 +165,7 @@ def confirm(values):
 while True:
     event, values = window.read()
 
-    if event == sg.WINDOW_CLOSED or event == '退出介面':
+    if event == sg.WINDOW_CLOSED or event == '退出視窗':
         break
 
     if event == '確認':
