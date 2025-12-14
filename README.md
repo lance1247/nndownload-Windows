@@ -1,19 +1,23 @@
 # nndownload-windows
 這個程式是用PySimpleGUI寫的，作為練習 
-
 由於nndownload使用較不方便，因此我寫了視窗化的介面，搭配勾選框，能更加輕鬆的使用
 
+## 2.0版本已推出
+### 新功能
+• 修改了需要 nndownload.py 才能運行的限制，現在無須其他程式，可以單獨運行
+• PySimpleGUI 以變為訂閱制，現在更改為免費的FreeSimpleGUI
 
 ## 使用方式
 
-該程式運行時會產生一個config檔，用來記錄配置，就不用重複輸入了
+• 該程式運行時會聲成一個config檔，用來記錄配置
 
 ### 執行 運行視窗.py 
 
 ```bash
 python 運行視窗.py 
 ```
-1.輸入路徑、網址、帳號與密碼
+
+1.輸入-路徑-、網址、帳號與密碼
 
 2.按下確認
 
@@ -23,10 +27,11 @@ python 運行視窗.py
 
 ### 或者使用.exe版
 
+• 但無法添加選項參數
+
 
 ## 介面預覽
-![image](https://github.com/user-attachments/assets/e296ded8-01d5-4703-b540-fb480a4d6d4c)
-
+![image](https://github.com/user-attachments/assets/382adb52-d4ae-444b-9501-b3720c2413bf)
 
 
 
