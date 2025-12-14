@@ -14,9 +14,12 @@
 
 ### 執行 運行視窗.py 
 
-安裝依賴項
+安裝nndownload與依賴項
 ```bash
 pip install nndownload
+```
+```bash
+pip install requirements.txt
 ```
 執行程式，或是直接點擊```運行視窗.py ```
 ```bash
