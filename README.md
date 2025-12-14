@@ -19,7 +19,7 @@
 pip install nndownload
 ```
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 執行程式，或是直接點擊```運行視窗.py ```
 ```bash
