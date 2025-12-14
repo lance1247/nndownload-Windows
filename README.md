@@ -40,8 +40,7 @@ python 運行視窗.py
 
 
 ## 介面預覽
-![image](https://github.com/user-attachments/assets/382adb52-d4ae-444b-9501-b3720c2413bf)
-
+<img width="770" height="821" alt="Preview (2)" src="https://github.com/user-attachments/assets/0ee3005f-5920-4ad8-a06a-8f98de443baf" />
 
 
 ## 未來期望
