@@ -1,4 +1,4 @@
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 import subprocess
 import threading
 import webbrowser
@@ -44,25 +44,25 @@ sg.set_options(font=('微軟正黑體', 12))
 # 創建窗口佈局，使用 config 文件中加載的默認值
 program_col = [
     [sg.Frame('輸入列',
-        [[
+        [
         [sg.Text('影片URL'), sg.Input(default_text=config.get('video_url', ''), key='video_url', size=(42, 1))],
         [sg.Text('帳號'), sg.Input(default_text=config.get('username', ''), key='username')],
         [sg.Text('密碼'), sg.Input(password_char='*', default_text=config.get('password', ''), key='password')],
         [sg.Text('輸入驗證碼'), sg.Input(key='captcha', size=(40, 1))],
-        ]]
+        ]
     ,font=('微軟正黑體', 16))],
 
     
     # 添加選項
     [sg.Frame('選用項目',
-        [[
+        [
         [sg.Checkbox('高品質(有時限流用不了)', key='high_quality')],
         [sg.Checkbox('下載縮圖', key='download_thumbnail')],
         [sg.Checkbox('下載影片評論', key='download_comments')],
         [sg.Checkbox('列出影像和音訊品質', key='list_quality')],
         [sg.Checkbox('只下載影片', key='video_only')],
         [sg.Checkbox('只下載音訊', key='audio_only')],
-        ]]
+        ]
     ,font=('微軟正黑體', 16))],
 ]
 
@@ -81,12 +81,11 @@ introduce = sg.Column(introduce_col)
 
 # 窗口整體
 layout = [
-    [sg.Text('選擇 nndownload 程式'), sg.Input(default_text=config.get('nndownload_path', ''), key='nndownload_path'), sg.FilesBrowse(button_text="選擇路徑", font=('微軟正黑體', 12,'bold'), file_types=(("Python 文件", "*.py"),))],
     [sg.Text('使用方式:', font=('微軟正黑體', 16))],
     [sg.Text('輸入路徑、網址、帳號與密碼，按下確認，檢查郵件中的驗證碼後再開始下載', font=('微軟正黑體', 16))],
     [program, sg.VSeperator(), introduce],
     [sg.Output(size=(80, 15), key='output')],  # 用於顯示 cmd 輸出的內容
-    [sg.Button('確認', font=('微軟正黑體', 12,'bold')), sg.Button('開始下載', font=('微軟正黑體', 12,'bold')), sg.Push(), sg.Button('退出視窗', font=('微軟正黑體', 12,'bold'))]
+    [sg.Button('確認以獲取驗證碼', font=('微軟正黑體', 12,'bold')), sg.Button('開始下載', font=('微軟正黑體', 12,'bold')), sg.Push(), sg.Button('退出視窗', font=('微軟正黑體', 12,'bold'))]
 ]
 
 window = sg.Window('nndownload 下載視窗', layout)
@@ -113,23 +112,19 @@ def run_command(command):
     process.wait()  # 等待進程結束
 
     # 根據返回碼顯示相應的提示信息
-    if process.returncode == 0:
-        display_message('請到郵箱獲取驗證碼，確認後請回到本介面輸入驗證碼')
-    else:
+    if process.returncode != 0:
         display_message('登入失敗，請重新檢查路徑與帳號密碼')
 
-def confirm(values):
-    nndownload_path = f'"{values["nndownload_path"]}"'  # 路徑中包含空格時，需要加引號
+def confirm(values): #取消nndownload_path
     username = values['username']
     password = values['password']
-
+    
     # 檢查是否輸入了影片 URL
     if not values['video_url']:
         sg.popup_error('請輸入影片 URL')  # 如果沒有輸入網址，彈出提示對話框
         return  # 阻止程序繼續執行
 
     # 更新配置
-    config['nndownload_path'] = values['nndownload_path']
     config['username'] = username
     config['password'] = password
 
@@ -154,7 +149,7 @@ def confirm(values):
         options.append('-vn')
 
     # 構建完整的命令
-    command = f'python {nndownload_path} {video_url} -u {username} -p {password} ' + ' '.join(options)
+    command = f'python -m nndownload "{video_url}" -u "{username}" -p "{password}" ' + ' '.join(options) #修改為不必再下載nndownload.py
     
     # 顯示提示信息
     display_message('請到郵箱獲取驗證碼，確認後請回到本視窗輸入驗證碼')
@@ -168,7 +163,7 @@ while True:
     if event == sg.WINDOW_CLOSED or event == '退出視窗':
         break
 
-    if event == '確認':
+    if event == '確認以獲取驗證碼':
         confirm(values)
 
     if event == '開始下載':
