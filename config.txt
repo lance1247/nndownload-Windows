@@ -1,4 +1,3 @@
-nndownload_path=E:\Tool\Video_Downloader\nndownload-1.18\nndownload.py
 video_url=
 username=
 password=
