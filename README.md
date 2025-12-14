@@ -5,6 +5,7 @@
 ## 2.0版本已推出
 ### 新功能
 • 修改了需要 nndownload.py 才能運行的限制，現在無須其他程式，可以單獨運行
+
 • PySimpleGUI 以變為訂閱制，現在更改為免費的FreeSimpleGUI
 
 ## 使用方式
