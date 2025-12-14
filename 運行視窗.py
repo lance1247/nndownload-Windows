@@ -82,7 +82,7 @@ introduce = sg.Column(introduce_col)
 # 窗口整體
 layout = [
     [sg.Text('使用方式:', font=('微軟正黑體', 16))],
-    [sg.Text('輸入路徑、網址、帳號與密碼，按下確認，檢查郵件中的驗證碼後再開始下載', font=('微軟正黑體', 16))],
+    [sg.Text('輸入網址、帳號與密碼，按下確認，檢查郵件中的驗證碼後再開始下載', font=('微軟正黑體', 16))],
     [program, sg.VSeperator(), introduce],
     [sg.Output(size=(80, 15), key='output')],  # 用於顯示 cmd 輸出的內容
     [sg.Button('確認以獲取驗證碼', font=('微軟正黑體', 12,'bold')), sg.Button('開始下載', font=('微軟正黑體', 12,'bold')), sg.Push(), sg.Button('退出視窗', font=('微軟正黑體', 12,'bold'))]
@@ -185,3 +185,4 @@ while True:
         webbrowser.open('https://space.bilibili.com/171022667?spm_id_from=333.1007.0.0')  # Bilibili連結
 
 window.close()
+
