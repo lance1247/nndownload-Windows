@@ -37,8 +37,6 @@ python 運行視窗.py
 
 ### 或者使用.exe版
 
-• 但無法添加選項參數
-
 
 ## 介面預覽
 ![image](https://github.com/user-attachments/assets/382adb52-d4ae-444b-9501-b3720c2413bf)
