@@ -15,7 +15,7 @@
 
 ### 執行 運行視窗.py 
 
-安裝nndownload與依賴項
+安裝nndownload與依賴項以及 ```ffmpeg```
 ```bash
 pip install nndownload
 ```
