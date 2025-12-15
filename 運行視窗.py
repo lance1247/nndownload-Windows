@@ -80,7 +80,7 @@ layout = [
     [sg.Push(),sg.Text('niconico會員影片下載視窗', font=('微軟正黑體', 24)),sg.Push()],
     [program, sg.VSeperator(), introduce],
     [sg.Output(size=(80, 15), key='output')],  # 用於顯示 cmd 輸出的內容
-    [sg.Button('確認以獲取驗證碼', font=('微軟正黑體', 12,'bold')), sg.Button('開始下載', font=('微軟正黑體', 12,'bold')), sg.Push(), sg.Button('退出視窗', font=('微軟正黑體', 12,'bold'))]
+    [sg.Button('確認以獲取驗證碼', font=('微軟正黑體', 12,'bold')), sg.Button('開始下載', disabled=True, font=('微軟正黑體', 12,'bold')), sg.Push(), sg.Button('退出視窗', font=('微軟正黑體', 12,'bold'))]
 ]
 
 window = sg.Window('nndownload-Windows', layout)
@@ -113,11 +113,6 @@ def run_command(command):
 def confirm(values): #取消nndownload_path
     username = values['username']
     password = values['password']
-    
-    # 檢查是否輸入了影片 URL
-    if not values['video_url']:
-        sg.popup_error('請輸入影片 URL')  # 如果沒有輸入網址，彈出提示對話框
-        return  # 阻止程序繼續執行
 
     # 更新配置
     config['username'] = username
@@ -159,15 +154,37 @@ while True:
         break
 
     if event == '確認以獲取驗證碼':
+    # --- v2.0.1版本更新前置檢查 ---
+        video_url = values['video_url'].strip()
+        username = values['username'].strip()
+        password = values['password'].strip()
+
+        if not video_url:
+           sg.popup_error('請輸入影片 URL')
+           continue
+        if not username or not password:
+           sg.popup_error('請輸入帳號與密碼')
+           continue
+        
         confirm(values)
+        window['開始下載'].update(disabled=False) #開啟按鈕(防呆)
 
     if event == '開始下載':
-        if process and process.poll() is None:  # 確保命令序仍在運行
-            captcha = values['captcha']
-            display_message(f'開始下載: {captcha}')
-            # 驗證碼通過 stdin 發送給命令序
-            process.stdin.write(captcha + '\n')
-            process.stdin.flush()
+        if process is None:
+           sg.popup_error('請先按「確認以獲取驗證碼」，並到信箱取得驗證碼')
+           continue
+
+        captcha = values['captcha'].strip()
+        
+        if not captcha:
+           sg.popup_error('請先輸入信箱中的驗證碼')
+           continue
+        
+        # 驗證碼通過 stdin 發送給命令序
+        process.stdin.write(captcha + '\n')
+        process.stdin.flush()
+        
+        window['開始下載'].update(disabled=True) #關閉按鈕(防呆)
 
     # 處理連結點擊事件
     if event == '-GITHUB-LINK-':
